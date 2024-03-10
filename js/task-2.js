@@ -13,16 +13,11 @@ const images = [
   },
 ];
 
-const galleryList = document.querySelector('ul.gallery');
+const gallery = document.querySelector('.gallery');
 
-// Створення HTML-коду галереї
-const galleryHtml = images.reduce((html, image) => {
-  return html + `<li><img src="${image.url}" alt="${image.alt}" /></li>`;
-}, '');
+const createMarkup = ({ url, alt }) =>
+  `<li class="gallery-item"><img class="gallery-img" src="${url}" alt="${alt}"></li>`;
 
-// Додавання галереї в DOM за одну операцію
-galleryList.insertAdjacentHTML('beforeend', galleryHtml);
+const markup = images.map(createMarkup).join('');
 
-// Додавання CSS-класів для оформлення
-galleryList.classList.add('gallery');
-galleryList.querySelectorAll('li').forEach(item => item.classList.add('gallery-item'));
+gallery.insertAdjacentHTML('afterbegin', markup);
